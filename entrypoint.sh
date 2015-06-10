@@ -38,7 +38,6 @@ elif [ "$command" = 'console' ]; then
   export JRUBY_OPTS="--dev $JRUBY_OPTS"
   exec bundle exec irb -r $XN_CLIENT
 elif [ "$command" = 'deps' ]; then
-  # TODO: maybe don't need deployment flag
   deps
   exec echo Done.
 fi
