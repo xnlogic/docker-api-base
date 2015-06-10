@@ -13,7 +13,11 @@ clean_deps() {
 
 deps() {
   echo Retrieving dependencies.
-  ruby --dev -S bundle install --path $VENDOR_BUNDLE
+  if [ -d Gemfile.lock ]; then
+    ruby --dev -S bundle update --path $VENDOR_BUNDLE
+  else
+    ruby --dev -S bundle install --path $VENDOR_BUNDLE
+  fi
   unset PACER_MANUAL_JARS
   ruby --dev -S bundle exec ruby --dev -I lib -e "puts 'Resolving jar dependencies'; require '${XN_CLIENT}'; puts 'Resolved jar dependencies'"
   export PACER_MANUAL_JARS=true
