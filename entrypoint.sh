@@ -13,7 +13,7 @@ clean_deps() {
 
 deps() {
   echo Retrieving dependencies.
-  ruby --dev -S bundle install --deployment --path $VENDOR_BUNDLE
+  ruby --dev -S bundle install --path $VENDOR_BUNDLE
   unset PACER_MANUAL_JARS
   ruby --dev -S bundle exec ruby --dev -I lib -e "puts 'Resolving jar dependencies'; require '${XN_CLIENT}'; puts 'Resolved jar dependencies'"
   export PACER_MANUAL_JARS=true
