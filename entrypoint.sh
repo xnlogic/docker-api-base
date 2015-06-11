@@ -36,7 +36,7 @@ if [ "$command" = 'server' ]; then
   set
   ensure_deps
   export JAVA_OPTS="-server $JAVA_OPTS"
-  exec puma -b tcp://0.0.0.0:8080 -e $XN_ENV
+  exec bundle exec puma -b tcp://0.0.0.0:8080 -e $XN_ENV
 elif [ "$command" = 'console' ]; then
   ensure_deps
   export JRUBY_OPTS="--dev $JRUBY_OPTS"
