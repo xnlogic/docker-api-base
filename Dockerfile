@@ -10,6 +10,8 @@ EXPOSE 8080
 
 WORKDIR /app
 
+# NOTE: bundle config contains ref to $VENDOR_BUNDLE value
+COPY bundle_config.yml /usr/local/bundle/config
 COPY entrypoint.sh /entrypoint.sh
 
 ENTRYPOINT [ "/entrypoint.sh" ]
