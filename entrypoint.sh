@@ -30,7 +30,6 @@ ensure_deps() {
   fi
 }
 
-echo Using $command
 
 if [ "$command" = 'server' ]; then
   set
@@ -41,6 +40,10 @@ elif [ "$command" = 'console' ]; then
   ensure_deps
   export JRUBY_OPTS="--dev $JRUBY_OPTS"
   exec bundle exec irb -r $XN_CLIENT
+elif [ "$command" = 'rspec' ]; then
+  ensure_deps
+  export JRUBY_OPTS="--dev $JRUBY_OPTS"
+  exec bundle exec rspec
 elif [ "$command" = 'deps' ]; then
   deps
   exec echo Done.
