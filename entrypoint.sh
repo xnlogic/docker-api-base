@@ -13,7 +13,7 @@ clean_deps() {
 
 deps() {
   echo Retrieving dependencies.
-  if [ -d Gemfile.lock ]; then
+  if [ -f Gemfile.lock ]; then
     ruby --dev -S bundle update --path $VENDOR_BUNDLE
   else
     ruby --dev -S bundle install --path $VENDOR_BUNDLE
@@ -38,12 +38,10 @@ if [ "$command" = 'server' ]; then
   exec bundle exec puma -b tcp://0.0.0.0:8080 -e $XN_ENV
 elif [ "$command" = 'console' ]; then
   ensure_deps
-  export JRUBY_OPTS="--dev $JRUBY_OPTS"
-  exec bundle exec irb -r $XN_CLIENT
+  exec bundle exec ruby --dev -S irb -r $XN_CLIENT
 elif [ "$command" = 'rspec' ]; then
   ensure_deps
-  export JRUBY_OPTS="--dev $JRUBY_OPTS"
-  exec bundle exec rspec
+  exec bundle exec ruby --dev -S $@
 elif [ "$command" = 'deps' ]; then
   deps
   exec echo Done.
