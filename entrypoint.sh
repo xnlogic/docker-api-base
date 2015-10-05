@@ -14,7 +14,7 @@ clean_deps() {
 deps() {
   echo Retrieving dependencies.
   if [ -f Gemfile.lock ]; then
-    ruby --dev -S bundle update --path $VENDOR_BUNDLE
+    ruby --dev -S bundle update
   else
     ruby --dev -S bundle install --path $VENDOR_BUNDLE
   fi
